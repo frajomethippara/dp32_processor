@@ -74,3 +74,19 @@ package dp32_types is
     procedure ints_to_bits (int : in integer; bits :out bit_vector);
     
 end dp32_types;
+
+package body dp32_types is
+    constant bool_to_bit : bool_to_bit_table := (false => '0', true => '1');
+    
+    function resolve_bit_32(driver: in bit_32_array) return bit_32 is
+        constant float_value: bit_32 := X"0000_0000";
+        variable result : bit_32 := float_value;
+    begin
+        for i in driver'range loop
+            result := result or driver(i);
+        end loop;
+        return result;
+    end resolve_bit_32;
+    
+    
+end dp32_types;
