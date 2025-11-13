@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Thu Nov 13 17:35:00 2025
+# Process ID: 2252
+# Current directory: H:/Projects/FPGA/Basys3/dp32_processor/dp32_processor.runs/synth_1
+# Command line: vivado.exe -log dp32.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source dp32.tcl
+# Log file: H:/Projects/FPGA/Basys3/dp32_processor/dp32_processor.runs/synth_1/dp32.vds
+# Journal file: H:/Projects/FPGA/Basys3/dp32_processor/dp32_processor.runs/synth_1\vivado.jou
+# Running On: DESKTOP-10L1NMP, OS: Windows, CPU Frequency: 2400 MHz, CPU Physical cores: 4, Host memory: 8435 MB
+#-----------------------------------------------------------
+source dp32.tcl -notrace
