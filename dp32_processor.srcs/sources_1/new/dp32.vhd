@@ -33,6 +33,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity dp32 is
 --  Port ( );
+-- below is a sample port declaration. Not for our aplication.
  port (
  clk : in bit;
  reset : in bit;
@@ -45,6 +46,7 @@ end dp32;
 architecture Behavioral of dp32 is
 
 begin
+    -- sample process. Not for our aplication.
     read <= clk AND reset;
     write <= clk OR reset;
 
