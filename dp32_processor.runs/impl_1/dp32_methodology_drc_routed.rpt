@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
-| Date         : Thu Nov 13 17:36:37 2025
+| Date         : Fri Nov 14 13:32:14 2025
 | Host         : DESKTOP-10L1NMP running 64-bit major release  (build 9200)
 | Command      : report_methodology -file dp32_methodology_drc_routed.rpt -pb dp32_methodology_drc_routed.pb -rpx dp32_methodology_drc_routed.rpx
 | Design       : dp32
