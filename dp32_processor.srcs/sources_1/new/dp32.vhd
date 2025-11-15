@@ -31,6 +31,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
+--library xil_defaultlib;
+--use xil_defaultlib.dp32_pkg.all;
+
 entity dp32 is
 --  Port ( );
 -- below is a sample port declaration. Not for our aplication.
