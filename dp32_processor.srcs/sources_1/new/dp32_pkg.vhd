@@ -31,14 +31,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-package dp32_types is
+package dp32_pkg is
  constant unit_delay : Time := 1 ns;
 
  function bits_to_int (bits : in bit_vector) return integer;
 
- end dp32_types;
+ end dp32_pkg;
 
-package body dp32_types is 
+package body dp32_pkg is 
      function bits_to_int (bits : in bit_vector) return integer is
          variable temp : bit_vector(bits'range);
          variable result : integer := 0;
@@ -56,7 +56,7 @@ package body dp32_types is
          end if;
      return result;
  end bits_to_int;
-end dp32_types;
+end dp32_pkg;
 
 --entity dp32_pkg is
 ----  Port ( );

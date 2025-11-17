@@ -33,6 +33,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 --library xil_defaultlib;
 --use xil_defaultlib.dp32_pkg.all;
+library work;
+use work.dp32_pkg.all;
 
 entity dp32 is
 --  Port ( );
