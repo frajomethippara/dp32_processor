@@ -31,8 +31,6 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
---library xil_defaultlib;
---use xil_defaultlib.dp32_pkg.all;
 library work;
 use work.dp32_pkg.all;
 
