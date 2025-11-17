@@ -72,7 +72,7 @@ proc create_report { reportName command } {
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param checkpoint.writeSynthRtdsInDcp 1
 set_param chipscope.maxJobs 2
-set_param synth.incrementalSynthesisCache C:/Users/User/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-26316-DESKTOP-10L1NMP/incrSyn
+set_param synth.incrementalSynthesisCache C:/Users/User/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-17872-DESKTOP-10L1NMP/incrSyn
 set_msg_config -id {Synth 8-256} -limit 10000
 set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
@@ -89,6 +89,7 @@ set_property ip_output_repo h:/Projects/FPGA/Basys3/dp32_processor/dp32_processo
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
+read_vhdl -library work H:/Projects/FPGA/Basys3/dp32_processor/dp32_processor.srcs/sources_1/new/dp32_pkg.vhd
 read_vhdl -library xil_defaultlib H:/Projects/FPGA/Basys3/dp32_processor/dp32_processor.srcs/sources_1/new/dp32.vhd
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
