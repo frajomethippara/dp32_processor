@@ -33,23 +33,41 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 package dp32_pkg is
 
-    constant unit_delay : time := 1 ns;
+    constant unit_delay : Time := 1 ns;
+    
     type bool_to_bit_table is array (boolean) of bit;
     constant bool_to_bit : bool_to_bit_table;
-
+    
     subtype bit_32 is bit_vector(31 downto 0);
-    type bit_32_array is array(integer range <>) of bit_32;
-
-
+    type bit_32_array is array (integer range <>) of bit_32;
+    function resolve_bit_32 (driver: in bit_32_array) return bit_32;
+    subtype bus_bit_32 is resolve_bit_32 bit_32;
+    
     subtype bit_8 is bit_vector(7 downto 0);
-
-    subtype cc_bits is bit_vector(3 downto 0);
+    
+    subtype CC_bits is bit_vector(2 downto 0);
     subtype cm_bits is bit_vector(3 downto 0);
-
-
---  constant unit_delay : Time := 1 ns;
-
---  function bits_to_int (bits : in bit_vector) return integer;
+    
+    constant op_add: bit_8 := X"00";
+    constant op_sub: bit_8 := X"01";
+    constant op_mul: bit_8 := X"02";
+    constant op_div: bit_8 := X"03";
+    constant op_addq: bit_8 := X"10";
+    constant op_subq: bit_8 := X"11";
+    constant op_mulq: bit_8 := X"12";
+    constant op_divq: bit_8 := X"13";
+    constant op_land: bit_8 := X"04";
+    constant op_lor: bit_8 := X"05";
+    constant op_lxor: bit_8 := X"06";
+    constant op_lmask: bit_8 := X"07";
+    constant op_ld: bit_8 := X"20";
+    constant op_st: bit_8 := X"21";
+    constant op_ldq: bit_8 := X"30";
+    constant op_stq: bit_8 := X"31";
+    constant op_br: bit_8 := X"40";
+    constant op_brq: bit_8 := X"50";
+    constant op_bi: bit_8 := X"41";
+    constant op_biq: bit_8 := X"51";
 
 end dp32_pkg;
 
