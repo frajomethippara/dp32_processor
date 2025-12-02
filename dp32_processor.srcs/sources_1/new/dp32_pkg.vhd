@@ -72,6 +72,24 @@ package dp32_pkg is
 end dp32_pkg;
 
 package body dp32_pkg is 
+
+    constant bool_to_bit : bool_to_bit_table := (false => '0', true => '1');
+
+    function resolve_bit_32(driver : in bit_32_array) return bit_32 is
+        constant float_value : bit_32 := X"0000_0000";
+        variable result: bit_32 := float_value;
+
+    begin
+        for i in driver'range loop
+            result := result or driver(i);
+        end loop;
+        return result;
+    end resolve_bit_32;
+
+
+
+
+    
     -- function bits_to_int (bits : in bit_vector) return integer is
     --     variable temp : bit_vector(bits'range);
     --     variable result : integer := 0;
@@ -88,5 +106,5 @@ package body dp32_pkg is
     --     result := (-result) - 1;
     --     end if;
     -- return result;
-    end bits_to_int;
+    -- send bits_to_int;
 end dp32_pkg;
