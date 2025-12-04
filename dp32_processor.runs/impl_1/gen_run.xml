@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1764434857">
+<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1764813384">
   <File Type="ROUTE-PWR" Name="dp32_power_routed.rpt"/>
   <File Type="PA-TCL" Name="dp32.tcl"/>
   <File Type="ROUTE-PWR-SUM" Name="dp32_power_summary_routed.pb"/>

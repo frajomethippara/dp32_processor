@@ -69,6 +69,8 @@ package dp32_pkg is
     constant op_bi: bit_8 := X"41";
     constant op_biq: bit_8 := X"51";
 
+    function bits_to_int(bits : in bit_vector) return integer;
+
 end dp32_pkg;
 
 package body dp32_pkg is 
@@ -86,7 +88,25 @@ package body dp32_pkg is
         return result;
     end resolve_bit_32;
 
+    function bits_to_int(bits: in bit_vector) return integer is
+        variable temp: bit_vector(bits'range);
+        variable result : integer := 0;
+    begin
+        if bits(bits'left) = '1' then
+            temp := not bits;
+        else
+            temp := bits;
+        end if;
 
+        for index in bits'range loop
+            result := result * 2 + bit'pos(temp(index)); 
+        end loop;
+        
+        if bits(bits'left) = '1' then
+            result := (-result) - 1;
+        end if;
+        return result;
+    end bits_to_int;
 
 
     
