@@ -70,6 +70,8 @@ package dp32_pkg is
     constant op_biq: bit_8 := X"51";
 
     function bits_to_int(bits : in bit_vector) return integer;
+    function bits_to_natural(bits : in bit_vector) return natural;
+    procedure int_to_bits(int : in integer; bits : out bit_vector);
 
 end dp32_pkg;
 
@@ -108,23 +110,33 @@ package body dp32_pkg is
         return result;
     end bits_to_int;
 
-
+    function bits_to_natural(bits : in bit_vector) return natural is
+        variable result : natural := 0;
+    begin
+        for index in bits'range loop
+            result := result * 2 + bit'pos(bits(index));
+        end loop;
+        return result;
+    end bits_to_natural;
     
-    -- function bits_to_int (bits : in bit_vector) return integer is
-    --     variable temp : bit_vector(bits'range);
-    --     variable result : integer := 0;
-    --     begin
-    --     if bits(bits'left) = '1' then-- negative number
-    --     temp := not bits;
-    --     else
-    --     temp := bits;
-    --     end if;
-    --     for index in bits'range loop-- sign bit of temp = '0'
-    --     result := result * 2 + bit'pos(temp(index));
-    --     end loop;
-    --     if bits(bits'left) = '1' then
-    --     result := (-result) - 1;
-    --     end if;
-    -- return result;
-    -- send bits_to_int;
+    procedure int_to_bits(int : in integer; bits : out bit_vector) is
+        variable temp : integer;
+        variable result : bit_vector(bits'range);
+    begin
+        if int < 0 then
+            temp := -(int + 1);
+        else
+            temp := int;
+        end if;
+
+        for index in bits'reverse_range loop
+            result(index) := bit'val(temp rem 2);
+            temp := temp/2;
+        end loop;
+        if int < 0 then
+            result := not result;
+            result(bits'left) := '1';
+        end if;
+        bits := result;
+    end int_to_bits;
 end dp32_pkg;
