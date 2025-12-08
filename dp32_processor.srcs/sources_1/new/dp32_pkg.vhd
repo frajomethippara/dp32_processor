@@ -80,8 +80,9 @@ package body dp32_pkg is
     constant bool_to_bit : bool_to_bit_table := (false => '0', true => '1');
 
     function resolve_bit_32(driver : in bit_32_array) return bit_32 is
-        constant float_value : bit_32 := X"0000_0000";
-        variable result: bit_32 := float_value;
+--        constant float_value : bit_32 := X"0000_0000";
+--        variable result: bit_32 := float_value;
+        variable result: bit_32 := X"0000_0000";
 
     begin
         for i in driver'range loop
