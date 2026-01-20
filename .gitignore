@@ -1,0 +1,9 @@
+.Xil/
+*.cache/
+*.hw/
+*.runs/
+*.ip_user_files/
+
+# Vivado command files
+vivado.jou   
+vivado.log
