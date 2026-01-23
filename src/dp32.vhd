@@ -31,8 +31,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-library work;
-use work.dp32_pkg.all;
+library dp32_lib;
+use dp32_lib.dp32_pkg.all;
 
 entity dp32 is
 --  Port ( );
