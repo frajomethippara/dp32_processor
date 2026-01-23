@@ -3,6 +3,8 @@
 *.hw/
 *.runs/
 *.ip_user_files/
+*.srcs/
+*.xpr
 
 # Vivado command files
 *.jou   
