@@ -12,6 +12,16 @@ Vivado
 # Command to run
 vivado -mode tcl -source .\build.tcl
 
+# Run synthesis
+reset_run synth_1
+launch_runs synth_1
+
+# Run implementation
+launch_runs impl_1
+
+# # Generate bitstream
+launch_runs impl_1 -to_step write_bitstream
+
 # Version
 Vivado v2023.2 (64-bit)
 SW Build: 4029153 on Fri Oct 13 20:14:34 MDT 2023
