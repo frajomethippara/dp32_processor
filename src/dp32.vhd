@@ -31,16 +31,16 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-library work;
-use work.dp32_pkg.all;
+library dp32_lib;
+use dp32_lib.dp32_pkg.all;
 
 entity dp32 is
 --  Port ( );
 -- below is a sample port declaration. Not for our aplication.
  port (
- clk : in bit;
- reset : in bit;
- read, write : out bit
+ btnC : in bit;
+ btnU : in bit;
+ btnL, btnR : out bit
  );
  
 
@@ -50,7 +50,7 @@ architecture Behavioral of dp32 is
 
 begin
     -- sample process. Not for our aplication.
-    read <= clk AND reset;
-    write <= clk OR reset;
+    btnL <= btnC AND btnU;
+    btnR <= btnC OR btnU;
 
 end Behavioral;
