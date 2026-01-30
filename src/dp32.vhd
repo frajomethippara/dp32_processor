@@ -48,6 +48,9 @@ end dp32;
 
 architecture Behavioral of dp32 is
 
+    subtype reg_addr is natural range 0 to 255;
+    type reg_array is array (reg_addr) of bit_32;
+    
 begin
     -- sample process. Not for our aplication.
     btnL <= btnC AND btnU;
