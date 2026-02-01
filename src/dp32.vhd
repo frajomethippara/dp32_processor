@@ -35,13 +35,24 @@ library dp32_lib;
 use dp32_lib.dp32_pkg.all;
 
 entity dp32 is
---  Port ( );
--- below is a sample port declaration. Not for our aplication.
- port (
- btnC : in bit;
- btnU : in bit;
- btnL, btnR : out bit
- );
+
+    generic(
+        Tpd: Time := unit_delay
+    );
+    port(
+        d_bus : inout bus_bit_32 bus;
+        a_bus : out bit_32;
+        read, write : out bit;
+        fetch : out bit;
+        ready : in bit;
+        phi1, phi2 : in bit;
+        reset : in bit
+    );
+--  port (
+--  btnC : in bit;
+--  btnU : in bit;
+--  btnL, btnR : out bit
+--  );
  
 
 end dp32;
@@ -53,7 +64,7 @@ architecture Behavioral of dp32 is
     
 begin
     -- sample process. Not for our aplication.
-    btnL <= btnC AND btnU;
-    btnR <= btnC OR btnU;
+    fetch <= phi1 AND phi2;
+    fetch <= phi1 OR phi2;
 
 end Behavioral;
