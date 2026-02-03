@@ -63,8 +63,52 @@ architecture Behavioral of dp32 is
     type reg_array is array (reg_addr) of bit_32;
     
 begin
-    -- sample process. Not for our aplication.
-    fetch <= phi1 AND phi2;
-    fetch <= phi1 OR phi2;
+    process
+    procedure memory_read(addr : in bit_32;
+                    fetch_cycle : in boolean;
+                    result : out bit_32) is
+    begin
+        
+        a_bus <= addr after Tpd;
+        fetch <= bool_to_bit(fetch_cycle) after Tpd;
 
+        wait until phi1 = '1';
+        if reset = '1' then
+            return;
+        end if;
+
+        -- T1 phase
+        read <= '1' after Tpd;
+        wait until phi1 = '1';
+        if reset = '1' then
+            return;
+        end if;
+
+        -- T2 phase
+        loop
+            wait until phi2 = '0';
+            if reset = '1' then
+                return;
+            end if;
+
+            if ready = '1' then
+                result := d_bus;
+                exit;
+            end if;
+        end loop;
+
+        wait until phi1 = '1';
+        if reset = '1' then
+            return;
+        end if;
+
+        read <= '0' after Tpd;
+    end procedure memory_read;
+
+    begin
+        if reset = '1' then
+            read <= '0' after Tpd;
+        end if;
+
+    end process;
 end Behavioral;
