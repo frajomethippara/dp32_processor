@@ -105,6 +105,42 @@ begin
         read <= '0' after Tpd;
     end procedure memory_read;
 
+    procedure memory_write(addr : in bit_32;
+        data : in bit_32) is
+    begin
+        a_bus <= addr after Tpd;
+        fetch <= '0';
+        wait until phi1 = '1';
+        if reset = '1' then
+            return;
+        end if;
+
+
+        write <= '1' after Tpd;wait until phi2 <= '1';
+        d_bus <= data after Tpd;
+        wait until phi1 = '1';
+        if reset = '1' then
+            return;
+        end if;
+
+        loop
+            wait until phi2 = '0';
+            if reset = '1' then
+                return;
+            end if;
+
+            exit when ready = '1';
+        end loop;
+        wait until phi1 = '1';
+        if reset = '1' then
+            return;
+        end if;
+
+
+        write <= '0' after Tpd;
+        d_bus <= null after Tpd;
+    end procedure memory_write;
+
     begin
         if reset = '1' then
             read <= '0' after Tpd;
