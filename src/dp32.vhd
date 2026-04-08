@@ -64,6 +64,7 @@ architecture Behavioral of dp32 is
     
 begin
     process
+        -- This process done in a procedure to for mem read and write
     procedure memory_read(addr : in bit_32;
                     fetch_cycle : in boolean;
                     result : out bit_32) is
