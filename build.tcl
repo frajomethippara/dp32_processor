@@ -35,19 +35,19 @@ update_compile_order -fileset sources_1
 set_property top dp32 [current_fileset]
 
 
-# Run synthesis
-puts "\nRunning synthesis..."
-launch_runs synth_1
-wait_on_run synth_1
+# # Run synthesis
+# puts "\nRunning synthesis..."
+# launch_runs synth_1
+# wait_on_run synth_1
 
-# Run implementation
-puts "\nRunning implementation..."
-launch_runs impl_1
-wait_on_run impl_1
+# # Run implementation
+# puts "\nRunning implementation..."
+# launch_runs impl_1
+# wait_on_run impl_1
 
-# # Generate bitstream
-puts "\nGenerating bitstream..."
-launch_runs impl_1 -to_step write_bitstream
-wait_on_run impl_1
+# # # Generate bitstream
+# puts "\nGenerating bitstream..."
+# launch_runs impl_1 -to_step write_bitstream
+# wait_on_run impl_1
 
 puts "\n Build complete!"
