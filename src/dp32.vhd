@@ -142,6 +142,13 @@ begin
         d_bus <= null after Tpd;
     end procedure memory_write;
 
+    procedure add(result : inout bit_32;
+        op1, op2 : in integer;
+        V, N, Z : out bit) is
+        begin
+            
+    end add;
+
     begin
         if reset = '1' then
             read <= '0' after Tpd;
