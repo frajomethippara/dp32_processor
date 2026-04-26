@@ -146,7 +146,7 @@ begin
         op1, op2 : in integer;
         V, N, Z : out bit) is
         begin
-            
+            -- implement funcitonality
     end add;
 
     begin
