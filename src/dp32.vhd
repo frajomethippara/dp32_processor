@@ -149,6 +149,13 @@ begin
             -- implement funcitonality
     end add;
 
+    procedure subtract(result: inout bit_32;
+    op1, op2: in integer;
+    V, N, Z: out bit) is
+    begin
+
+    end subtract
+
     begin
         if reset = '1' then
             read <= '0' after Tpd;
