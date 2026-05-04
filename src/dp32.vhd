@@ -147,6 +147,12 @@ begin
         V, N, Z : out bit) is
         begin
             -- implement funcitonality
+
+            -- logic for positive overfow
+
+            --logic for negative overflow
+
+            -- else logic for normal addition
     end add;
 
     procedure subtract(result: inout bit_32;
