@@ -143,25 +143,40 @@ begin
     end procedure memory_write;
 
     procedure add(result : inout bit_32;
-        op1, op2 : in integer;
-        V, N, Z : out bit) is
+            op1, op2 : in integer;
+            V, N, Z : out bit) is
         begin
-            -- implement funcitonality
-
-            -- logic for positive overfow
-
-            --logic for negative overflow
-
-            -- else logic for normal addition
+            if op2 > 0 and op1 > integer'high - op2 then --positive overflow
+                int_to_bits(((integer'low + op1) + op2) - integer'high - 1, result);
+                V := '1';
+            elsif op2 < 0 and op1 < integer'low - op2 then --negative overflow
+                int_to_bits(((integer'high + op1) + op2) - integer'low + 1, result);
+                V := '1';
+            else
+                int_to_bits(op1 + op2, result);
+                V := '0';
+            end if;
+            N := result(31);
+            Z := bool_to_bit(result = X"0000_0000");
     end add;
 
     procedure subtract(result: inout bit_32;
     op1, op2: in integer;
     V, N, Z: out bit) is
     begin
-        -- implement functionality
-
-    end subtract
+        if op2 < 0 and op1 > integer'high + op2 then -- positive overflow
+            int_to_bits(((integer'low + op1) - op2) - integer'high - 1, result);
+            V := '1';
+        elsif op2 > 0 and op1 < integer'low + op2 then -- negative overflow
+            int_to_bits(((integer'high + op1) - op2 ) - integer'low + 1, result);
+            V := '1';
+        else
+            int_to_bits(op1 - op2, result);
+            V := '0';
+        end if;
+            N := result(31);
+            Z := bool_to_bit(result = X"0000_0000");
+    end subtract;
 
     begin
         if reset = '1' then
