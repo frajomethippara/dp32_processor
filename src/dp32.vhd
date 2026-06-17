@@ -178,6 +178,26 @@ begin
             Z := bool_to_bit(result = X"0000_0000");
     end subtract;
 
+    procedure multiply(result: inout bit_32;
+    op1, op2: in integer;
+    V, N, Z: out bit) is
+    begin
+        if ((op1 > 0 and op2 > 0) or (op1 < 0 and op2 < 0)) 
+        and (abs op1 > integer'high / abs op2) then -- positive overflow
+                int_to_bits(integer'high, result);
+                V := '1';
+        elsif ((op1 > 0 and op2 < 0) or (op1 < 0 and op2 > 0)) 
+        and ((-abs op1 < integer'low / abs op2)) then -- negative overflow
+                int_to_bits(integer'low, result);
+                V := '1';
+        else
+            int_to_bits(op1 * op2, result);
+            V := '0';
+        end if;
+        N := result(31);
+        Z := bool_to_bit(result = X"0000_0000");
+    end multiply;
+
     begin
         if reset = '1' then
             read <= '0' after Tpd;
