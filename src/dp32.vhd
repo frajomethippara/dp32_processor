@@ -198,6 +198,25 @@ begin
         Z := bool_to_bit(result = X"0000_0000");
     end multiply;
 
+    procedure divide(result: inout bit_32;
+    op1, op2: in integer;
+    V, N, Z: out bit) is
+    begin
+        if op2 = 0 then
+            if op1 >= 0 then
+                int_to_bits(integer'high, result);
+            else
+                int_to_bits(integer'low, result);
+            end if;
+            V := '1';
+        else
+            int_to_bits(op1 / op2, result);
+            V := '0';
+        end if;
+        N := result(31);
+        Z := bool_to_bit(result = X"0000_0000");
+    end divide;
+    
     begin
         if reset = '1' then
             read <= '0' after Tpd;
