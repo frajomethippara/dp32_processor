@@ -142,6 +142,81 @@ begin
         d_bus <= null after Tpd;
     end procedure memory_write;
 
+    procedure add(result : inout bit_32;
+            op1, op2 : in integer;
+            V, N, Z : out bit) is
+        begin
+            if op2 > 0 and op1 > integer'high - op2 then --positive overflow
+                int_to_bits(((integer'low + op1) + op2) - integer'high - 1, result);
+                V := '1';
+            elsif op2 < 0 and op1 < integer'low - op2 then --negative overflow
+                int_to_bits(((integer'high + op1) + op2) - integer'low + 1, result);
+                V := '1';
+            else
+                int_to_bits(op1 + op2, result);
+                V := '0';
+            end if;
+            N := result(31);
+            Z := bool_to_bit(result = X"0000_0000");
+    end add;
+
+    procedure subtract(result: inout bit_32;
+    op1, op2: in integer;
+    V, N, Z: out bit) is
+    begin
+        if op2 < 0 and op1 > integer'high + op2 then -- positive overflow
+            int_to_bits(((integer'low + op1) - op2) - integer'high - 1, result);
+            V := '1';
+        elsif op2 > 0 and op1 < integer'low + op2 then -- negative overflow
+            int_to_bits(((integer'high + op1) - op2 ) - integer'low + 1, result);
+            V := '1';
+        else
+            int_to_bits(op1 - op2, result);
+            V := '0';
+        end if;
+            N := result(31);
+            Z := bool_to_bit(result = X"0000_0000");
+    end subtract;
+
+    procedure multiply(result: inout bit_32;
+    op1, op2: in integer;
+    V, N, Z: out bit) is
+    begin
+        if ((op1 > 0 and op2 > 0) or (op1 < 0 and op2 < 0)) 
+        and (abs op1 > integer'high / abs op2) then -- positive overflow
+                int_to_bits(integer'high, result);
+                V := '1';
+        elsif ((op1 > 0 and op2 < 0) or (op1 < 0 and op2 > 0)) 
+        and ((-abs op1 < integer'low / abs op2)) then -- negative overflow
+                int_to_bits(integer'low, result);
+                V := '1';
+        else
+            int_to_bits(op1 * op2, result);
+            V := '0';
+        end if;
+        N := result(31);
+        Z := bool_to_bit(result = X"0000_0000");
+    end multiply;
+
+    procedure divide(result: inout bit_32;
+    op1, op2: in integer;
+    V, N, Z: out bit) is
+    begin
+        if op2 = 0 then
+            if op1 >= 0 then
+                int_to_bits(integer'high, result);
+            else
+                int_to_bits(integer'low, result);
+            end if;
+            V := '1';
+        else
+            int_to_bits(op1 / op2, result);
+            V := '0';
+        end if;
+        N := result(31);
+        Z := bool_to_bit(result = X"0000_0000");
+    end divide;
+    
     begin
         if reset = '1' then
             read <= '0' after Tpd;
