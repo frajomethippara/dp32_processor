@@ -218,8 +218,15 @@ begin
     end divide;
     
     begin
+
+        -- Reset logic
         if reset = '1' then
             read <= '0' after Tpd;
+            write <= '0' after Tpd;
+            fetch <= '0' after Tpd;
+            d_bus <= null after Tpd;
+            PC <= X"0000_0000" ;
+            wait until reset = '0';
         end if;
 
     end process;
