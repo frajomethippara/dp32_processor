@@ -64,6 +64,21 @@ architecture Behavioral of dp32 is
     
 begin
     process
+
+        variable reg: reg_array;
+        variable PC : bit_32;
+        variable current_instr : bit_32;
+        variable op : bit_8;
+        variable r3, r1, r2 : reg_addr;
+        variable i8 : integer;
+        alias cm_i : bit is current_instr(19);
+        alias cm_V : bit is current_instr(18);
+        alias cm_N : bit is current_instr(17);
+        alias cm_Z : bit is current_instr(16);
+        variable cc_V, cc_n, cc_Z : bit;
+        variable temp_V, temp_N, temp_z : bit;
+        variable displacement, effective_addr : bit_32;
+
         -- This process done in a procedure to for mem read and write
     procedure memory_read(addr : in bit_32;
                     fetch_cycle : in boolean;
@@ -80,28 +95,28 @@ begin
 
         -- T1 phase
         read <= '1' after Tpd;
-        wait until phi1 = '1';
+        -- wait until phi1 = '1';
         if reset = '1' then
             return;
         end if;
 
-        -- T2 phase
-        loop
-            wait until phi2 = '0';
-            if reset = '1' then
-                return;
-            end if;
+        -- -- T2 phase
+        -- loop
+        --     wait until phi2 = '0';
+        --     if reset = '1' then
+        --         return;
+        --     end if;
 
-            if ready = '1' then
-                result := d_bus;
-                exit;
-            end if;
-        end loop;
+        --     if ready = '1' then
+        --         result := d_bus;
+        --         exit;
+        --     end if;
+        -- end loop;
 
-        wait until phi1 = '1';
-        if reset = '1' then
-            return;
-        end if;
+        -- wait until phi1 = '1';
+        -- if reset = '1' then
+        --     return;
+        -- end if;
 
         read <= '0' after Tpd;
     end procedure memory_read;
@@ -225,9 +240,11 @@ begin
             write <= '0' after Tpd;
             fetch <= '0' after Tpd;
             d_bus <= null after Tpd;
-            PC <= X"0000_0000" ;
+            PC := X"0000_0000" ;
             wait until reset = '0';
         end if;
+
+        memory_read(PC, true, current_instr);
 
     end process;
 end Behavioral;
